@@ -1,6 +1,11 @@
 package data;
 
 public class Aircraft {
+	
+	/*
+	 * 	There are too many attributes for the assignment, 
+	 * 	but I found it interesting.
+	 */
 
 	private String manufacturer;
 	private String model;
@@ -31,8 +36,11 @@ public class Aircraft {
 	}
 
 	public double calcMachFromMph(int mph) {
-		double roundOff = Math.round((mph / 660) * 100) / 100.D;
-		return roundOff;
+		double mach = mph / 660.0;
+		mach = mach*100;
+		mach = Math.round(mach);	//Similar to the rounding that I used for last weeks project
+		mach = mach /100;
+		return mach;
 	}
 
 	@Override

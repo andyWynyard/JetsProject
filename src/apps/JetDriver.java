@@ -5,12 +5,11 @@ import java.util.Scanner;
 import data.Aircraft;
 
 public class JetDriver {
+	static Scanner keyboard = new Scanner(System.in);
+	static Aircraft[] airArray = new Aircraft[100];
 
 	public static void main(String[] args) {
 
-		Scanner keyboard = new Scanner(System.in);
-
-		Aircraft[] airArray = new Aircraft[100];
 		/*
 		 * (String manufacturer, String model, String modelVariant, double
 		 * price, int maxSpeed, int serviceCeiling, int maxRange, int dryWeight,
@@ -44,8 +43,9 @@ public class JetDriver {
 			int choice = keyboard.nextInt();
 			keyboard.nextLine();
 			/*
-			 * Added this, as using .nextLine() after .nextInt() causes
-			 * problems. Super thanks to Stack Overflow for this one!!!
+			 * Added this extra .nextLine(), as using .nextLine() after
+			 * .nextInt() causes problems. Super thanks to Stack Overflow for
+			 * this one!!!
 			 * https://stackoverflow.com/questions/27141183/scanner-nextline-
 			 * occasionally-skips-input Could have closed the scanner, but
 			 * wanted to solve the issue.
@@ -59,7 +59,7 @@ public class JetDriver {
 						continue;
 					}
 				}
-			} else if (choice == 2) { //for the fastest jet
+			} else if (choice == 2) { // for the fastest jet
 				int fastestSpeed = 0;
 				int fastestJet = 0;
 				for (int i = 0; i < airArray.length; i++) {
@@ -83,60 +83,72 @@ public class JetDriver {
 					}
 				}
 				System.out.println(airArray[rangeJet]);
-			} else if (choice == 4) {	// To input info about a new jet. 
-				for (int i = 0; i < airArray.length; i++) {
-					if (airArray[i] == null) {
-						System.out.println("Here you can input info for the aircraft.");
+			} else if (choice == 4) { // To input info about a new jet.
 
-						System.out.print("Please enter the manufacturer: ");
-						String manufacturer = keyboard.nextLine();
+				toCreateNewJet(); // Calls method at bottom of page.
 
-						System.out.print("Please enter the model: ");
-						String model = keyboard.nextLine();
-
-						System.out.print("Please enter the common name: ");
-						String variant = keyboard.nextLine();
-
-						System.out.print("Please enter the price (million USD): ");
-						int price = keyboard.nextInt();
-
-						System.out.print("Please enter the max speed (mph): ");
-						int maxSpeed = keyboard.nextInt();
-
-						System.out.print("Please enter the service ceiling (feet): ");
-						int serviceCeiling = keyboard.nextInt();
-
-						System.out.print("Please enter the max range (miles): ");
-						int maxRange = keyboard.nextInt();
-
-						System.out.print("Please enter the dry weight (lbs): ");
-						int dryWeight = keyboard.nextInt();
-
-						System.out.print("Please enter the max take off weight (lbs): ");
-						int maxTakeOffWeight = keyboard.nextInt();
-
-						System.out.print("Please enter the fuel capacity: ");
-						int fuelCapacity = keyboard.nextInt();
-
-						System.out.print("Please enter when the aircraft entered service: ");
-						int yearIntroduced = keyboard.nextInt();
-
-						System.out.println("Thanks for the info!!!");
-
-						airArray[i] = new Aircraft(manufacturer, model, variant, price, maxSpeed, serviceCeiling,
-								maxRange, dryWeight, maxTakeOffWeight, fuelCapacity, yearIntroduced);
-
-						break;
-					} else {
-						continue;
-					}
-				}
 			} else {
 				keyboard.close();
 				quit = true;
 			}
 		} while (quit == false);
 
+	}
+
+	private static void toCreateNewJet() {
+
+		for (int i = 0; i < airArray.length; i++) {
+			if (airArray[i] == null) {
+				/*
+				 * This is actually a whole bunch of requests for input, and I
+				 * hate the mass of it, would prefer to put it somewhere and
+				 * make it cleaner.
+				 */
+
+				System.out.println("Here you can input info for the aircraft.");
+
+				System.out.print("Please enter the manufacturer: ");
+				String manufacturer = keyboard.nextLine();
+
+				System.out.print("Please enter the model: ");
+				String model = keyboard.nextLine();
+
+				System.out.print("Please enter the common name: ");
+				String variant = keyboard.nextLine();
+
+				System.out.print("Please enter the price (million USD): ");
+				int price = keyboard.nextInt();
+
+				System.out.print("Please enter the max speed (mph): ");
+				int maxSpeed = keyboard.nextInt();
+
+				System.out.print("Please enter the service ceiling (feet): ");
+				int serviceCeiling = keyboard.nextInt();
+
+				System.out.print("Please enter the max range (miles): ");
+				int maxRange = keyboard.nextInt();
+
+				System.out.print("Please enter the dry weight (lbs): ");
+				int dryWeight = keyboard.nextInt();
+
+				System.out.print("Please enter the max take off weight (lbs): ");
+				int maxTakeOffWeight = keyboard.nextInt();
+
+				System.out.print("Please enter the fuel capacity: ");
+				int fuelCapacity = keyboard.nextInt();
+
+				System.out.print("Please enter when the aircraft entered service: ");
+				int yearIntroduced = keyboard.nextInt();
+
+				System.out.println("Thanks for the info!!!");
+
+				airArray[i] = new Aircraft(manufacturer, model, variant, price, maxSpeed, serviceCeiling, maxRange,
+						dryWeight, maxTakeOffWeight, fuelCapacity, yearIntroduced);
+				break;
+			} else {
+				continue;
+			}
+		}
 	}
 
 }
