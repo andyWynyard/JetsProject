@@ -103,6 +103,8 @@ public class JetDriver {
 				 * This is actually a whole bunch of requests for input, and I
 				 * hate the mass of it, would prefer to put it somewhere and
 				 * make it cleaner.
+				 * 	***UPDATE***
+				 * Crushed out 100+ lines from this.
 				 */
 
 				System.out.println("Here you can input info for the aircraft.");
@@ -116,39 +118,35 @@ public class JetDriver {
 				System.out.print("Please enter the common name: ");
 				String variant = keyboard.nextLine();
 
-				System.out.print("Please enter the price (million USD): ");
-				int price = keyboard.nextInt();
+				String[] inputArray = { "Please enter the price (million USD): ", "Please enter the max speed (mph): ",
+						"Please enter the service ceiling (feet): ", "Please enter the max range (miles): ",
+						"Please enter the dry weight (lbs): ", "Please enter the max take off weight (lbs): ",
+						"Please enter the fuel capacity: ", "Please enter when the aircraft entered service: " };
 
-				System.out.print("Please enter the max speed (mph): ");
-				int maxSpeed = keyboard.nextInt();
+				airArray[i] = new Aircraft(manufacturer, model, variant, inputIntsForAircraft(inputArray[0]),
+						inputIntsForAircraft(inputArray[1]), inputIntsForAircraft(inputArray[2]),
+						inputIntsForAircraft(inputArray[3]), inputIntsForAircraft(inputArray[4]),
+						inputIntsForAircraft(inputArray[5]), inputIntsForAircraft(inputArray[6]),
+						inputIntsForAircraft(inputArray[7]));
+				//This is the magic, and crushed down the code.
 
-				System.out.print("Please enter the service ceiling (feet): ");
-				int serviceCeiling = keyboard.nextInt();
-
-				System.out.print("Please enter the max range (miles): ");
-				int maxRange = keyboard.nextInt();
-
-				System.out.print("Please enter the dry weight (lbs): ");
-				int dryWeight = keyboard.nextInt();
-
-				System.out.print("Please enter the max take off weight (lbs): ");
-				int maxTakeOffWeight = keyboard.nextInt();
-
-				System.out.print("Please enter the fuel capacity: ");
-				int fuelCapacity = keyboard.nextInt();
-
-				System.out.print("Please enter when the aircraft entered service: ");
-				int yearIntroduced = keyboard.nextInt();
-
-				System.out.println("Thanks for the info!!!");
-
-				airArray[i] = new Aircraft(manufacturer, model, variant, price, maxSpeed, serviceCeiling, maxRange,
-						dryWeight, maxTakeOffWeight, fuelCapacity, yearIntroduced);
 				break;
+
 			} else {
 				continue;
 			}
 		}
 	}
 
+	private static int inputIntsForAircraft(String value) {
+		int valForInput;
+		do {
+			System.out.print(value);
+			while (!keyboard.hasNextInt()) {
+				System.out.print("This needs to be a positive number, try again: ");
+				keyboard.next();
+			}
+			return valForInput = keyboard.nextInt();
+		} while (valForInput <= 0);
+	}
 }
