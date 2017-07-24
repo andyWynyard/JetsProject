@@ -85,7 +85,7 @@ public class JetDriver {
 				System.out.println(airArray[rangeJet]);
 			} else if (choice == 4) { // To input info about a new jet.
 
-				toCreateNewJet(); // Calls method at bottom of page.
+				toCreateNewJet(); // Calls method just below here.
 
 			} else {
 				keyboard.close();
@@ -128,7 +128,8 @@ public class JetDriver {
 						inputIntsForAircraft(inputArray[3]), inputIntsForAircraft(inputArray[4]),
 						inputIntsForAircraft(inputArray[5]), inputIntsForAircraft(inputArray[6]),
 						inputIntsForAircraft(inputArray[7]));
-				//This is the magic, and crushed down the code.
+				// This is the magic, and crushed down the code.
+				// pulls inputIntsForAircraft method at bottom of page for use in airArray constructor.
 
 				break;
 
